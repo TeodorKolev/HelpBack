@@ -1,6 +1,6 @@
-# HelpBack
+# NodesBack
 
-CRUD API for a simple application using Node.js, Express and MongoDB.
+CRUD API for a simple nodes application using Node.js, Express and MongoDB.
 
 ## Steps to Setup
 

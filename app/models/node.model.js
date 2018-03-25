@@ -16,4 +16,4 @@ let NoteSchema = mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('helpSeeker', NoteSchema, 'helpSeekers');
+module.exports = mongoose.model('node', NoteSchema, 'helpSeekers');
