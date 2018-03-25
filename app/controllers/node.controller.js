@@ -120,7 +120,7 @@ exports.delete = function (req, res) {
       if (err.kind === 'ObjectId') {
         return res.status(404).send({message: "Node not found with id " + req.params.id});
       }
-      return res.status(500).send({message: "Could not delete hlpSeeker with id " + req.params.id});
+      return res.status(500).send({message: "Could not delete node with id " + req.params.id});
     }
     if (!node) {
       return res.status(404).send({message: "Node not found with id " + req.params.id});
