@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 let NoteSchema = mongoose.Schema({
-  title: { type: 'String', required: false },
+  title: { type: 'String', required: true },
   name: { type: 'String', required: true },
   image: { type: 'String', required: false },
   description: { type: 'String', required: true },

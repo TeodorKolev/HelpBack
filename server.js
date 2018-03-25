@@ -7,7 +7,8 @@ var app = express();
 app.use(cors());
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json({limit: '2mb'}));
+app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
 
 // parse application/json
 app.use(bodyParser.json())
