@@ -1,16 +1,15 @@
-let node = require('../models/node.model.js');
+var mongoose = require('mongoose');
+var Node = mongoose.model('Node');
+var router = require('express').Router();
 
 /**
- * Create Node
- * @param req
- * @param res
- * @returns {*|void}
+ * Create node
  */
-exports.create = function (req, res) {
+router.post('/nodes', function (req, res) {
   if (!req.body.title || !req.body.description || !req.body.iban || !req.body.name) {
     return res.status(400).send({message: "Not filled mandatory data."});
   }
-  let currentNode = new node({
+  var currentNode = new Node({
     title: req.body.title,
     name: req.body.name,
     image: req.body.image,
@@ -31,15 +30,13 @@ exports.create = function (req, res) {
       res.send(data);
     }
   });
-};
+});
 
 /**
  * Get all Nodes
- * @param req
- * @param res
  */
-exports.findAll = function (req, res) {
-  node.find(function (err, nodes) {
+router.get('/nodes', function (req, res) {
+  Node.find(function (err, nodes) {
     if (err) {
       console.log(err);
       res.status(500).send({message: "Some error occurred while retrieving Nodes."});
@@ -47,15 +44,13 @@ exports.findAll = function (req, res) {
       res.send(nodes);
     }
   });
-};
+});
 
 /**
  * Get Node by ID
- * @param req
- * @param res
  */
-exports.findOne = function (req, res) {
-  node.findById(req.params.id, function (err, node) {
+router.get('/nodes/:id', function (req, res) {
+  Node.findById(req.params.id, function (err, node) {
     if (err) {
       console.log(err);
       if (err.kind === 'ObjectId') {
@@ -68,15 +63,13 @@ exports.findOne = function (req, res) {
     }
     res.send(node);
   });
-};
+});
 
 /**
  * Update Node
- * @param req
- * @param res
  */
-exports.update = function (req, res) {
-  node.findById(req.params.id, function (err, node) {
+router.put('/nodes/:id', function (req, res) {
+  Node.findById(req.params.id, function (err, node) {
     if (err) {
       console.log(err);
       if (err.kind === 'ObjectId') {
@@ -87,17 +80,17 @@ exports.update = function (req, res) {
     if (!node) {
       return res.status(404).send({message: "Node not found with id " + req.params.id});
     }
-    if (req.body.title) { node.title = req.body.title; }
-    if (req.body.name) { node.name = req.body.name; }
-    if (req.body.image) { node.image = req.body.image; }
-    if (req.body.description) { node.description = req.body.description; }
-    if (req.body.status) { node.status = req.body.status; }
-    if (req.body.bank) { node.bank = req.body.bank; }
-    if (req.body.iban) { node.iban = req.body.iban; }
-    if (req.body.bic) { node.bic = req.body.bic; }
-    if (req.body.swift) { node.swift = req.body.swift; }
-    if (req.body.holder) { node.holder = req.body.holder; }
-    if (req.body.refs) { node.refs = req.body.refs; }
+    if (typeof req.body.title !== 'undefined') { node.title = req.body.title; }
+    if (typeof req.body.name !== 'undefined') { node.name = req.body.name; }
+    if (typeof req.body.image !== 'undefined') { node.image = req.body.image; }
+    if (typeof req.body.description !== 'undefined') { node.description = req.body.description; }
+    if (typeof req.body.status !== 'undefined') { node.status = req.body.status; }
+    if (typeof req.body.bank !== 'undefined') { node.bank = req.body.bank; }
+    if (typeof req.body.iban !== 'undefined') { node.iban = req.body.iban; }
+    if (typeof req.body.bic !== 'undefined') { node.bic = req.body.bic; }
+    if (typeof req.body.swift !== 'undefined') { node.swift = req.body.swift; }
+    if (typeof req.body.holder !== 'undefined') { node.holder = req.body.holder; }
+    if (typeof req.body.refs !== 'undefined') { node.refs = req.body.refs; }
     node.save(function (err, data) {
       if (err) {
         res.status(500).send({message: "Could not update node with id " + req.params.id});
@@ -106,15 +99,13 @@ exports.update = function (req, res) {
       }
     });
   });
-};
+});
 
 /**
  * Delete Node
- * @param req
- * @param res
  */
-exports.delete = function (req, res) {
-  node.findByIdAndRemove(req.params.id, function (err, node) {
+router.delete('/nodes/:id', function (req, res) {
+  Node.findByIdAndRemove(req.params.id, function (err, node) {
     if (err) {
       console.log(err);
       if (err.kind === 'ObjectId') {
@@ -127,4 +118,6 @@ exports.delete = function (req, res) {
     }
     res.send({message: "Node deleted successfully!"})
   });
-};
+});
+
+module.exports = router;
