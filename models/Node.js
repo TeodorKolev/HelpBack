@@ -16,6 +16,9 @@ var NodeSchema = new mongoose.Schema({
   paypal: {type: String, match: [/^[a-zA-Z0-9 @.-]{0,100}$/, 'is invalid']},
   holder:  {type: String, match: [/^[a-zA-Zа-яА-Я '-.!"']{0,200}$/, 'is invalid']},
   address: {type: String, match: [/^[a-zA-Zа-яА-Я0-9 '-.,!"']{0,200}$/, 'is invalid']},
+  email: {type: String, match: [/\S+@\S+\.\S+/, 'is invalid']},
+  phone: {type: String, match: [/^[0-9 -]{0,20}$/, 'is invalid']},
+  sms: {type: String, match: [/^[a-zA-Zа-яА-Я '-.,!"']{0,100}$/, 'is invalid']},
   refs: [String],
 }, {timestamps: true});
 
