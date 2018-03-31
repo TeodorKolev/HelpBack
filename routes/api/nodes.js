@@ -5,7 +5,7 @@ var router = require('express').Router();
 /**
  * Create node
  */
-router.post('/nodes', function (req, res) {
+router.post('/', function (req, res) {
   if (!req.body.title || !req.body.description || !req.body.iban || !req.body.name) {
     return res.status(400).send({message: "Not filled mandatory data."});
   }
@@ -35,7 +35,7 @@ router.post('/nodes', function (req, res) {
 /**
  * Get all Nodes
  */
-router.get('/nodes', function (req, res) {
+router.get('/', function (req, res) {
   Node.find(function (err, nodes) {
     if (err) {
       console.log(err);
@@ -46,10 +46,11 @@ router.get('/nodes', function (req, res) {
   });
 });
 
+
 /**
  * Get Node by ID
  */
-router.get('/nodes/:id', function (req, res) {
+router.get('/:id', function (req, res) {
   Node.findById(req.params.id, function (err, node) {
     if (err) {
       console.log(err);
@@ -68,7 +69,7 @@ router.get('/nodes/:id', function (req, res) {
 /**
  * Update Node
  */
-router.put('/nodes/:id', function (req, res) {
+router.put('/:id', function (req, res) {
   Node.findById(req.params.id, function (err, node) {
     if (err) {
       console.log(err);
@@ -104,7 +105,7 @@ router.put('/nodes/:id', function (req, res) {
 /**
  * Delete Node
  */
-router.delete('/nodes/:id', function (req, res) {
+router.delete('/:id', function (req, res) {
   Node.findByIdAndRemove(req.params.id, function (err, node) {
     if (err) {
       console.log(err);

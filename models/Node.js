@@ -14,4 +14,4 @@ var NodeSchema = new mongoose.Schema({
   refs: [String],
 }, {timestamps: true});
 
-module.exports = mongoose.model('Node', NodeSchema);
+mongoose.model('Node', NodeSchema);
