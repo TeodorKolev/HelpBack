@@ -5,7 +5,7 @@ var router = require('express').Router();
 /**
  * Create node
  */
-router.post('/', function (req, res) {
+router.post('/nodes', function (req, res) {
   if (!req.body.title || !req.body.description || !req.body.iban || !req.body.name) {
     return res.status(400).send({message: "Not filled mandatory data."});
   }
